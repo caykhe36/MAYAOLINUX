@@ -1,0 +1,16 @@
+# VMware virtual machine runtime and binary files
+*.vmdk
+*.vmem
+*.vmsn
+*.vmsd
+*.scoreboard
+*.nvram
+*.log
+*.lck
+*.lck/
+*.vmx.lck
+*.vmx~
+*.vmxf~
+
+# ISO images (can be downloaded using setup.ps1 or Download-ISO.ps1)
+*.iso
