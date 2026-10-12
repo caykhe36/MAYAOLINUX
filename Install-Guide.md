@@ -1,99 +1,66 @@
-# Hướng dẫn sử dụng Tiny Core Linux 64-bit trên VMware Workstation
+# Hướng dẫn sử dụng Lubuntu 64-bit trên VMware Workstation
 
-## 1. Tổng quan về Tiny Core Linux
-**Tiny Core Linux** là bản phân phối Linux nhẹ nhất thế giới có giao diện đồ họa (GUI):
-- **Dung lượng file ISO**: ~32 MB (`TinyCorePure64.iso`).
-- **RAM sử dụng khi khởi động**: Chỉ khoảng 50MB - 70MB RAM.
-- **Tốc độ khởi động**: Dưới 3 giây từ lúc bật máy ảo.
-- **Cơ chế hoạt động**: Chạy 100% trong bộ nhớ RAM (RAM-disk), đảm bảo tốc độ phản hồi cực nhanh và không sợ bị hỏng hệ điều hành khi tắt đột ngột.
+## 1. Thông số máy ảo
+- **Hệ điều hành**: Lubuntu 22.04 LTS 64-bit (Môi trường LXQt siêu nhẹ).
+- **RAM**: 4096 MB (4 GB) — cấu hình lý tưởng để vừa nhẹ vừa chạy mượt mà PyCharm / VS Code.
+- **CPU**: 2 vCPUs.
+- **Ổ cứng**: 30 GB (Thin-provisioned) — chứa thoải mái hệ điều hành, Python, PyCharm và các thư viện.
+- **Đồ họa**: Tự động hỗ trợ **Full màn hình (Auto-resize)** nét căng theo cửa sổ VMware.
 
 ---
 
 ## 2. Cách khởi động máy ảo
 
-### Cách 1: Khởi động nhanh (Khuyên dùng)
-- Nhấp đúp chuột vào file `Start-VM.bat` tại thư mục `C:\MAYAOLINUX`.
-- VMware Workstation sẽ tự động mở lên và bật nguồn máy ảo ngay lập tức.
-
-### Cách 2: Mở trực tiếp trong VMware Workstation
 1. Mở phần mềm **VMware Workstation**.
-2. Chọn menu **File** -> **Open...** (hoặc nhấn `Ctrl + O`).
-3. Điều hướng tới `C:\MAYAOLINUX` và chọn file `TinyCoreLinux.vmx`.
-4. Nhấn nút **Power on this virtual machine** (nút Play màu xanh).
-
-### Cách 3: Dùng PowerShell script
-```powershell
-# Bật máy ảo có giao diện:
-.\manage-vm.ps1 -Action Start
-
-# Bật máy ảo chạy nền (chạy ngầm không hiện cửa sổ):
-.\manage-vm.ps1 -Action Start -NoGui
-
-# Kiểm tra trạng thái máy ảo:
-.\manage-vm.ps1 -Action Status
-
-# Tắt máy ảo an toàn:
-.\manage-vm.ps1 -Action Stop
-```
+2. Chọn menu **File** -> **Open...** -> chọn [`C:\MAYAOLINUX\Lubuntu.vmx`](file:///C:/MAYAOLINUX/Lubuntu.vmx).
+3. Hoặc nhấp đúp vào file [`Start-VM.bat`](file:///C:/MAYAOLINUX/Start-VM.bat) tại thư mục `C:\MAYAOLINUX`.
+4. Nhấn nút **Power on this virtual machine** (nút Play màu xanh ▶️).
 
 ---
 
-## 3. Giao diện và các thao tác cơ bản
+## 3. Cài đặt hệ điều hành (Chỉ làm 1 lần đầu)
 
-Khi máy ảo khởi động lên màn hình Desktop:
-- **Thanh Dock (wbar)** nằm ở cạnh dưới màn hình với các biểu tượng:
-  - **Terminal (Aterm)**: Mở cửa sổ dòng lệnh Linux.
-  - **Apps**: Quản lý và cài đặt gói ứng dụng (Package Manager).
-  - **ControlPanel**: Bảng điều khiển hệ thống (Mạng, màn hình, người dùng, sao lưu...).
-  - **Exit**: Tắt máy (Shutdown) hoặc Khởi động lại (Reboot).
-- **Menu chuột phải**: Nhấp chuột phải vào bất kỳ vị trí trống nào trên Desktop để mở Menu ứng dụng và tác vụ.
-
----
-
-## 4. Cách cài đặt phần mềm & kết nối mạng
-
-### Kết nối mạng
-Máy ảo đã được cấu hình cạc mạng NAT (`e1000`), tự động nhận IP từ máy chủ Windows qua DHCP và có internet ngay khi khởi động.
-Để kiểm tra mạng trong Terminal:
-```sh
-ping -c 3 google.com
-```
-
-### Cài đặt ứng dụng qua giao diện đồ họa (Apps GUI)
-1. Bấm vào biểu tượng **Apps** trên thanh Dock.
-2. Chọn **Apps** -> **Cloud (Remote)** -> **Browse**.
-3. Tìm kiếm ứng dụng bạn cần (ví dụ: `firefox`, `leafpad`, `htop`, `git`, `curl`...).
-4. Chọn chế độ nạp: **OnBoot** (tự nạp mỗi khi mở máy) và bấm **Go**.
-
-### Cài đặt ứng dụng qua dòng lệnh (CLI)
-Sử dụng công cụ `tce-load`:
-```sh
-# Cập nhật danh sách gói:
-tce-update
-
-# Cài đặt trình soạn thảo Leafpad:
-tce-load -wi leafpad
-
-# Cài đặt trình duyệt Firefox:
-tce-load -wi firefox
-
-# Cài đặt Git và cURL:
-tce-load -wi git curl
-```
+Khi máy ảo khởi động từ ISO Lubuntu:
+1. Màn hình khởi động sẽ hiển thị: chọn **Try or Install Lubuntu**.
+2. Trên màn hình Desktop, nhấp đúp chuột vào biểu tượng **Install Lubuntu 22.04 LTS**.
+3. Các bước cài đặt:
+   - **Language**: Chọn *English* (hoặc *Tiếng Việt*).
+   - **Location / Timezone**: Chọn *Asia/Ho_Chi_Minh*.
+   - **Partitions**: Chọn **Erase disk** (xóa đĩa ảo 30GB đã tạo sẵn, an toàn tuyệt đối, không ảnh hưởng đến ổ thật của Windows).
+   - **User info**: Đặt tên tài khoản và mật khẩu theo ý bạn.
+4. Bấm **Install** -> Chờ khoảng 2-3 phút là cài xong hoàn toàn!
+5. Sau khi khởi động lại, máy ảo sẽ tự động boot từ ổ đĩa cứng 30GB vĩnh viễn.
 
 ---
 
-## 5. Cách lưu dữ liệu hoặc cài đặt lên ổ đĩa cứng vĩnh viễn (TC-Install)
+## 4. Bật chế độ Full màn hình (Auto-fit Screen)
 
-Tiny Core chạy mặc định trong RAM, do đó các thay đổi cài đặt sẽ mất đi khi tắt máy trừ khi bạn cấu hình Backup hoặc cài trực tiếp lên ổ cứng 10GB (`TinyCoreLinux.vmdk`) đã tạo sẵn:
+Lubuntu tích hợp sẵn hoặc tự nhận diện VMware Tools:
+1. Trong cửa sổ VMware, chọn menu **View** -> tích chọn:
+   - **Autofit Window**
+   - **Autofit Guest**
+2. Nhấn tổ hợp phím **`Ctrl + Alt + Enter`** để vào chế độ Full màn hình tràn toàn bộ màn hình máy tính của bạn.
+3. Nếu muốn cài thêm bản VMware Tools mới nhất từ Ubuntu repository, mở Terminal (Ctrl + Alt + T) chạy:
+   ```bash
+   sudo apt update
+   sudo apt install -y open-vm-tools open-vm-tools-desktop
+   ```
 
-### Cài đặt Tiny Core lên ổ đĩa cứng (`TinyCoreLinux.vmdk`):
-1. Trong Tiny Core Desktop, mở **Apps**.
-2. Tìm và cài đặt công cụ: `tc-install-GUI` (hoặc mở Terminal chạy `tce-load -wi tc-install-GUI`).
-3. Mở **tc-install** từ menu.
-4. Chọn mục tiêu cài đặt là ổ đĩa cứng `/dev/sda`.
-5. Chọn định dạng **ext4** và bấm **Proceed**.
-6. Sau khi cài xong, bạn có thể tháo file ISO ra khỏi máy ảo và máy sẽ tự boot trực tiếp từ ổ cứng `TinyCoreLinux.vmdk`.
+---
 
-### Hoặc sử dụng tính năng Persistence Backup của Tiny Core:
-Khi bấm nút **Exit** (biểu tượng tắt máy), chọn chế độ **Backup** để Tiny Core tự động nén thư mục cá nhân `/home/tc` và lưu vào đĩa cứng. Khi khởi động lại, máy sẽ tự động phục hồi toàn bộ dữ liệu.
+## 5. Hướng dẫn cài đặt PyCharm trên Lubuntu
+
+Sau khi vào Lubuntu, bạn mở Terminal (`Ctrl + Alt + T`) và thực hiện theo 1 trong 2 cách sau:
+
+### Cách 1: Cài PyCharm Community bằng Snap (Khuyên dùng - 1 câu lệnh duy nhất)
+```bash
+sudo snap install pycharm-community --classic
+```
+*Sau khi cài xong, biểu tượng PyCharm sẽ xuất hiện ngay trong Menu ứng dụng (Development).*
+
+### Cách 2: Cài PyCharm qua JetBrains Toolbox hoặc tải trực tiếp
+```bash
+# Cài đặt Python 3, pip và môi trường ảo venv:
+sudo apt update
+sudo apt install -y python3 python3-pip python3-venv git
+```

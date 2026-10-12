@@ -1,14 +1,13 @@
-# Tiny Core Linux 64-bit trên VMware Workstation
+# Lubuntu 64-bit trên VMware Workstation (Hỗ trợ Full Màn Hình & PyCharm)
 
-Dự án cấu hình và tự động hóa máy ảo Linux siêu nhẹ **Tiny Core Linux 64-bit** (TinyCorePure64) chạy trên nền tảng **VMware Workstation**.
+Dự án máy ảo **Lubuntu 64-bit** (môi trường đồ họa LXQt siêu nhẹ) được cấu hình tối ưu để chạy trên **VMware Workstation**, phục vụ học tập và lập trình Python với **PyCharm**.
 
-## 🚀 Đặc điểm nổi bật
-- **Kích thước siêu nhỏ**: File ISO cài đặt chỉ **~32 MB**.
-- **Tiêu thụ tài nguyên tối thiểu**: Khởi động chỉ chiếm khoảng **50MB - 70MB RAM**, cấp phát 1024MB RAM cho trải nghiệm mượt mà.
-- **Tốc độ cực nhanh**: Chạy hoàn toàn trên RAM-disk, thời gian khởi động từ 1 - 3 giây.
-- **Giao diện đồ họa (GUI)**: Đầy đủ môi trường Desktop với cửa sổ, chuột, thanh Dock biểu tượng (wbar) và trình quản lý ứng dụng (Apps).
-- **Hỗ trợ 64-bit hiện đại**: Nhân Linux 64-bit mới nhất tương thích với kiến trúc x86_64 hiện nay.
-- **Ổ đĩa ảo 10GB thin-provisioned**: Sẵn sàng để lưu trữ dữ liệu hoặc cài đặt vĩnh viễn (TC-Install).
+## 🚀 Đặc điểm cấu hình
+- **Hệ điều hành**: Lubuntu 22.04 LTS 64-bit.
+- **Tiêu thụ RAM**: Chỉ ~450 MB RAM ở trạng thái chờ, cấp phát 4GB RAM cho máy ảo chạy mượt mà mọi dự án lập trình.
+- **Ổ đĩa ảo**: 30 GB (Thin-provisioned) sẵn sàng cho PyCharm, Android Studio, Python Packages...
+- **Full màn hình**: Tự động nhận diện độ phân giải màn hình máy chủ và co giãn tràn viền (Auto-fit Screen / `Ctrl + Alt + Enter`).
+- **Tối ưu VMware**: Đã tắt 3D MKS DirectX để tương thích tuyệt đối với mọi cạc đồ họa mà không bị lỗi crash.
 
 ---
 
@@ -16,24 +15,19 @@ Dự án cấu hình và tự động hóa máy ảo Linux siêu nhẹ **Tiny Co
 
 ```text
 C:\MAYAOLINUX\
-├── TinyCoreLinux.vmx      # File cấu hình máy ảo VMware
-├── TinyCoreLinux.vmxf     # File metadata XML của máy ảo
-├── TinyCoreLinux.vmdk     # Ổ đĩa ảo VMware 10GB (thin-provisioned)
-├── TinyCorePure64.iso     # File ISO cài đặt Tiny Core Linux 64-bit (~32MB)
-├── Start-VM.bat           # Script 1-click khởi động ngay máy ảo
-├── manage-vm.ps1          # Script PowerShell điều khiển máy ảo (Start/Stop/Reset/Status)
-├── setup.ps1              # Script tự động tải ISO và tạo ổ đĩa nếu cài mới
-├── Install-Guide.md       # Sổ tay hướng dẫn sử dụng và cài đặt phần mềm chi tiết
-└── README.md              # Tài liệu giới thiệu dự án
+├── Lubuntu.vmx            # File cấu hình máy ảo Lubuntu cho VMware Workstation
+├── Lubuntu.vmxf           # File metadata XML
+├── Lubuntu.vmdk           # Ổ đĩa ảo 30GB (thin-provisioned)
+├── lubuntu.iso            # File ISO cài đặt Lubuntu 22.04 LTS
+├── Start-VM.bat           # Script 1-click mở máy ảo trong VMware
+├── Download-Lubuntu.ps1   # Script tải ISO có hỗ trợ resume
+├── Install-Guide.md       # Sổ tay hướng dẫn cài đặt Lubuntu và PyCharm chi tiết
+└── README.md              # Giới thiệu dự án
 ```
 
 ---
 
-## ⚡ Khởi động nhanh
+## ⚡ Khởi động máy ảo
 
-1. Nhấp đúp chuột vào file [`Start-VM.bat`](file:///C:/MAYAOLINUX/Start-VM.bat) để mở và chạy máy ảo trên VMware Workstation.
-2. Hoặc chạy lệnh PowerShell:
-   ```powershell
-   .\manage-vm.ps1 -Action Start
-   ```
-3. Xem hướng dẫn chi tiết cách dùng, cài phần mềm và lưu dữ liệu tại: [`Install-Guide.md`](file:///C:/MAYAOLINUX/Install-Guide.md).
+1. Mở file [`Start-VM.bat`](file:///C:/MAYAOLINUX/Start-VM.bat) hoặc mở VMware Workstation chọn [`Lubuntu.vmx`](file:///C:/MAYAOLINUX/Lubuntu.vmx).
+2. Xem hướng dẫn cài đặt và cài PyCharm tại: [`Install-Guide.md`](file:///C:/MAYAOLINUX/Install-Guide.md).
