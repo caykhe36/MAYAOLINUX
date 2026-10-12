@@ -6,6 +6,7 @@
 *.scoreboard
 *.nvram
 *.log
+*.dmp
 *.lck
 *.lck/
 *.vmx.lck
